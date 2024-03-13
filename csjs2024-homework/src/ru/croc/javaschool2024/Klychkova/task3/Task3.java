@@ -1,4 +1,4 @@
-package ru.croc.javaschool2024.surname.task3;
+package ru.croc.javaschool2024.Klychkova.task3;
 
 public class Task3 {
     /**

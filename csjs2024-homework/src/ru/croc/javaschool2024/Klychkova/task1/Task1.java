@@ -1,6 +1,5 @@
-package ru.croc.javaschool2024.surname.task1;
+package ru.croc.javaschool2024.Klychkova.task1;
 
-import java.text.DecimalFormat;
 import java.util.Locale;
 import java.util.Scanner;
 

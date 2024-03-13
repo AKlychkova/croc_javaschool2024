@@ -1,7 +1,7 @@
-package ru.croc.javaschool2024.surname.task1.tests;
+package ru.croc.javaschool2024.Klychkova.task1.tests;
 
 import org.testng.annotations.Test;
-import ru.croc.javaschool2024.surname.task1.Task1;
+import ru.croc.javaschool2024.Klychkova.task1.Task1;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

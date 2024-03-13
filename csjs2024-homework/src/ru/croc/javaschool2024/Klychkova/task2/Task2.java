@@ -1,4 +1,4 @@
-package ru.croc.javaschool2024.surname.task2;
+package ru.croc.javaschool2024.Klychkova.task2;
 
 
 import java.security.InvalidParameterException;
