@@ -6,11 +6,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
-public class Order {
+public class Order implements StatusChangeable {
     private final String code;
     private final LocalDateTime createdDate;
     private LocalDateTime collectedDate;
-    private LocalDateTime receiptDate;
+    private LocalDateTime closedDate;
     private final Product[] productsList;
     private String clientName;
     private String clientPhone;
@@ -20,15 +20,15 @@ public class Order {
         return code;
     }
 
-    public Order(LocalDateTime createdDate, String clientName, String clientPhone, Product... productsList) {
-        if (createdDate == null || clientName == null || clientPhone == null || productsList == null) {
+    public Order(String clientName, String clientPhone, Product... productsList) {
+        if (clientName == null || clientPhone == null || productsList == null) {
             throw new InvalidParameterException("Parameters cannot be null.");
         }
         if (productsList.length > 10) {
             throw new InvalidParameterException("Order cannot contain more than 10 products.");
         }
 
-        this.createdDate = createdDate;
+        this.createdDate = LocalDateTime.now();
         this.productsList = productsList;
         this.clientName = clientName;
         this.clientPhone = clientPhone;
@@ -50,8 +50,8 @@ public class Order {
         return collectedDate;
     }
 
-    public LocalDateTime getReceiptDate() {
-        return receiptDate;
+    public LocalDateTime getClosedDate() {
+        return closedDate;
     }
 
     public Product[] getProductsList() {
@@ -66,14 +66,6 @@ public class Order {
         return clientPhone;
     }
 
-    public void setCollectedDate(LocalDateTime collectedDate) {
-        this.collectedDate = collectedDate;
-    }
-
-    public void setReceiptDate(LocalDateTime receiptDate) {
-        this.receiptDate = receiptDate;
-    }
-
     public void setClientName(String clientName) {
         this.clientName = clientName;
     }
@@ -83,19 +75,32 @@ public class Order {
     }
 
     public void collect() {
-        status = OrderStatus.COLLECTED;
+        if (status == OrderStatus.CREATED) {
+            status = OrderStatus.COLLECTED;
+            collectedDate = LocalDateTime.now();
+        } else {
+            throw new IllegalStateException(String.format("Cannot collect order from status %s", status.toString()));
+        }
     }
 
     public void close() {
-        status = OrderStatus.CLOSED;
+        if (status == OrderStatus.COLLECTED) {
+            status = OrderStatus.CLOSED;
+            closedDate = LocalDateTime.now();
+        } else {
+            throw new IllegalStateException(String.format("Cannot close order from status %s", status.toString()));
+        }
     }
 
     public String getNotificationText() {
-        StringBuilder products_description = new StringBuilder();
+        if (status != OrderStatus.COLLECTED) {
+            throw new IllegalStateException("Order is not collected");
+        }
+        StringBuilder productsDescription = new StringBuilder();
         BigDecimal sum = BigDecimal.ZERO;
         for (var product : productsList) {
             sum = sum.add(BigDecimal.valueOf(product.getPrice()));
-            products_description.append(String.format("%s, %.2f₽\n", product.getName(), product.getPrice()));
+            productsDescription.append(String.format("%s, %.2f₽\n", product.getName(), product.getPrice()));
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         return String.format("""
@@ -111,6 +116,6 @@ public class Order {
                 
                 С наилучшими пожеланиями, магазин “Кошки и картошки”,
                 %s г.
-                """, clientName, code, products_description,sum,LocalDateTime.now().format(formatter));
+                """, clientName, code, productsDescription,sum,LocalDateTime.now().format(formatter));
     }
 }
