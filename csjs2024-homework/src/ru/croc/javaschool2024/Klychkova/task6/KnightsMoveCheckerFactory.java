@@ -39,6 +39,9 @@ public final class KnightsMoveCheckerFactory {
                         throw new IllegalMoveException(from,to);
                     }
                 }
+                if (positions.length == 1) {
+                    ChessPositionParser.parse(positions[0]);
+                }
             }
         };
     }

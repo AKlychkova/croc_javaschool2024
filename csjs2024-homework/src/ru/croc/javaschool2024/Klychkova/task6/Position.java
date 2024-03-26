@@ -5,13 +5,13 @@ public class Position implements ChessPosition {
     private final int y;
 
     public Position(int x, int y) {
-        if (x < 0 || x > 7 || y < 0 || y > 7) {
-            throw new IllegalPositionException(
-                    String.format("Position (%d, %d) cannot be created, both coordinates must be in [0,7]", x, y)
-            );
-        }
         this.x = x;
         this.y = y;
+        if (x < 0 || x > 7 || y < 0 || y > 7) {
+            throw new IllegalPositionException(
+                    String.format("Position %s cannot be created", this)
+            );
+        }
     }
 
     @Override

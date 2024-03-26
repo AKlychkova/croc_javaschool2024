@@ -17,6 +17,8 @@ public final class Application {
             System.out.print("OK");
         } catch (IllegalMoveException e) {
             System.out.print("конь так не ходит: " + e.getMessage());
+        } catch (IllegalPositionException e){
+            System.out.println(e.getMessage());
         }
     }
 }
