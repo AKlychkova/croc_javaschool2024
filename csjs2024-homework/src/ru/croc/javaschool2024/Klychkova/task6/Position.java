@@ -1,9 +1,6 @@
 package ru.croc.javaschool2024.Klychkova.task6;
 
-public class Position implements ChessPosition {
-    private final int x;
-    private final int y;
-
+public record Position(int x, int y) implements ChessPosition {
     public Position(int x, int y) {
         this.x = x;
         this.y = y;
@@ -13,16 +10,6 @@ public class Position implements ChessPosition {
                     this.toString()
             );
         }
-    }
-
-    @Override
-    public int x() {
-        return x;
-    }
-
-    @Override
-    public int y() {
-        return y;
     }
 
     @Override
