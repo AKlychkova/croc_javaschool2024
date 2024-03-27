@@ -1,14 +1,14 @@
 package ru.croc.javaschool2024.Klychkova.task6;
 
 public class IllegalPositionException extends RuntimeException {
-    private final String message;
+    private final String position;
 
-    public IllegalPositionException(String message) {
-        this.message = message;
+    public String getPosition() {
+        return position;
     }
 
-    @Override
-    public String getMessage() {
-        return message;
+    public IllegalPositionException(String message, String position) {
+        super(message);
+        this.position = position;
     }
 }

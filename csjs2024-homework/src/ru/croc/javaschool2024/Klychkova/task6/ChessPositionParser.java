@@ -25,7 +25,10 @@ public final class ChessPositionParser {
      */
     public static ChessPosition parse(final String position) {
         if (position.length() != 2) {
-            throw new IllegalPositionException(String.format("String %s does not match the position notation", position));
+            throw new IllegalPositionException(
+                    String.format("String %s does not match the position notation", position),
+                    position
+            );
         }
         return new Position(position.charAt(0) - 'a', position.charAt(1) - '1');
     }

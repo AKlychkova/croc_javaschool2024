@@ -9,7 +9,8 @@ public class Position implements ChessPosition {
         this.y = y;
         if (x < 0 || x > 7 || y < 0 || y > 7) {
             throw new IllegalPositionException(
-                    String.format("Position %s cannot be created", this)
+                    String.format("Position %s cannot be created", this),
+                    this.toString()
             );
         }
     }
