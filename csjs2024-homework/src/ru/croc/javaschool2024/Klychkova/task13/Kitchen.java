@@ -25,6 +25,7 @@ public class Kitchen {
 
     /**
      * Метод удаления повара
+     *
      * @param id id повара, которого необходимо удалить
      */
     public void removeKitchener(long id) {
@@ -74,13 +75,10 @@ public class Kitchen {
                 // проверяем условия
                 .filter(additionalConditions)
                 // сортируем по оценкам
-                .sorted((dish1, dish2) -> {
-                    if (dish1.getKingAssessment() != dish2.getKingAssessment()) {
-                        return Byte.compare(dish2.getKingAssessment(), dish1.getKingAssessment());
-                    } else {
-                        return Byte.compare(dish2.getCourtiersAssertion(), dish1.getCourtiersAssertion());
-                    }
-                })
+                .sorted(Comparator
+                        .comparing(Dish::getKingAssessment)
+                        .thenComparing(Dish::getCourtiersAssessment)
+                        .reversed())
                 // ограничиваем размер
                 .limit(maxLength)
                 .toList();
@@ -89,7 +87,7 @@ public class Kitchen {
     /**
      * Метод добавления новых блюд поварам, прошедшим обучение
      *
-     * @param newDishes новые блюда
+     * @param newDishes  новые блюда
      * @param kitcheners повара, прошедшие обучение
      */
     public void addDishes(Collection<Dish> newDishes, Collection<Kitchener> kitcheners) {

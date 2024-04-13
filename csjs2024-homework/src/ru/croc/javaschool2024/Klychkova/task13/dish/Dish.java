@@ -10,7 +10,7 @@ public class Dish {
     private final Collection<String> ingredients;
     private final DishCategory category;
     byte kingAssessment;
-    byte courtiersAssertion;
+    byte courtiersAssessment;
 
     public Dish(
             String name,
@@ -23,14 +23,9 @@ public class Dish {
         this.name = name;
         this.recipe = recipe;
         this.ingredients = ingredients;
-//        if (category != DishCategory.BEVERAGE) {
-//            this.category = category;
-//        } else {
-//            throw new IllegalArgumentException("Блюдо может быть только закуской, горячим или десертом");
-//        }
         this.category = category;
         setKingAssessment(kingAssessment);
-        setCourtiersAssertion(courtiersAssessment);
+        setCourtiersAssessment(courtiersAssessment);
     }
 
     public DishCategory getCategory() {
@@ -49,8 +44,8 @@ public class Dish {
         return kingAssessment;
     }
 
-    public byte getCourtiersAssertion() {
-        return courtiersAssertion;
+    public byte getCourtiersAssessment() {
+        return courtiersAssessment;
     }
 
 
@@ -63,9 +58,9 @@ public class Dish {
         }
     }
 
-    public void setCourtiersAssertion(byte courtiersAssertion) {
-        if (courtiersAssertion >= 0 && courtiersAssertion <= 100) {
-            this.courtiersAssertion = courtiersAssertion;
+    public void setCourtiersAssessment(byte courtiersAssessment) {
+        if (courtiersAssessment >= 0 && courtiersAssessment <= 100) {
+            this.courtiersAssessment = courtiersAssessment;
         } else {
             throw new IllegalArgumentException("Оценка придворных должна быть от 0 до 100.");
         }
@@ -82,5 +77,14 @@ public class Dish {
     @Override
     public int hashCode() {
         return Objects.hash(name);
+    }
+
+    public String getRecipe() {
+        return recipe;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s\t%s\t%d\t%d", name, category.toString(),kingAssessment, courtiersAssessment);
     }
 }
