@@ -1,6 +1,5 @@
 package ru.croc.javaschool2024.Klychkova.task11;
 
-import java.io.SequenceInputStream;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;

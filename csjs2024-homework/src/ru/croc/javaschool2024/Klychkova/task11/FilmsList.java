@@ -25,7 +25,7 @@ public class FilmsList {
         }
         else {
             throw new IllegalArgumentException(
-                    String.format("Файл %s не доступен для чтения", path.toAbsolutePath().toString())
+                    String.format("Файл %s не доступен для чтения", path.toAbsolutePath())
             );
         }
     }

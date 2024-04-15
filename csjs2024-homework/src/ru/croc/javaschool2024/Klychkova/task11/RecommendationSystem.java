@@ -37,7 +37,7 @@ public class RecommendationSystem {
         // сортируем по количеству просмотров по убыванию
         recommendations.sort((id1, id2) -> views.get(id2).compareTo(views.get(id1)));
 
-        if (recommendations.size() > 0) {
+        if (!recommendations.isEmpty()) {
             return filmsList.getName(recommendations.get(0));
         }
         else {
