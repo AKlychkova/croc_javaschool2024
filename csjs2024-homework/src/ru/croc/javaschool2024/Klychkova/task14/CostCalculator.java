@@ -2,6 +2,7 @@ package ru.croc.javaschool2024.Klychkova.task14;
 
 import java.math.BigDecimal;
 import java.util.Map;
+import java.util.Optional;
 
 public class CostCalculator {
     private final Map<String, BigDecimal> priceList;
@@ -13,10 +14,9 @@ public class CostCalculator {
     }
 
     public BigDecimal calculateCost() {
-        BigDecimal sum = BigDecimal.valueOf(0);
-        for (var entry : purchaseList.entrySet()) {
-            sum = sum.add(priceList.get(entry.getKey()).multiply(BigDecimal.valueOf(entry.getValue())));
-        }
-        return sum;
+        Optional<BigDecimal> sum = purchaseList.entrySet().stream()
+                .map(entry -> priceList.get(entry.getKey()).multiply(BigDecimal.valueOf(entry.getValue())))
+                .reduce(BigDecimal::add);
+        return sum.orElse(BigDecimal.ZERO);
     }
 }
