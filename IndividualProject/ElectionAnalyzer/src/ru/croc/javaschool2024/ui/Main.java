@@ -82,6 +82,8 @@ public class Main extends JFrame {
      */
     private void addTurnoutDistribution() {
         var turnoutDistribution = new TurnoutDistributionMethod(data.getTurnoutData());
+        JPanel tabPanel = new Tab(turnoutDistribution).getTabPanel();
+        pTurnoutDistribution.add(tabPanel);
         // Если столбцов в гистограмме слишком мало, предупреждаем пользователя об необъетивности данного метода.
         if (turnoutDistribution.getBinsNumber() < 10) {
             if (tpMethod.getSelectedIndex() == 2) {
@@ -92,8 +94,6 @@ public class Main extends JFrame {
             }
             tpMethod.addChangeListener(tooSmallDataset);
         }
-        JPanel tabPanel = new Tab(turnoutDistribution).getTabPanel();
-        pTurnoutDistribution.add(tabPanel);
     }
 
     /**
