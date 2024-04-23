@@ -17,12 +17,12 @@ public class Tab {
 
     /**
      * @param method      Метод выявления фальсификаций.
-     * @param graph_width Ширина графа.
+     * @param graphWidth Ширина графа.
      */
-    public Tab(Method method, int graph_width) {
+    public Tab(Method method, int graphWidth) {
         labelDescription.setText(method.getDescription());
         labelInfo.setText(method.getAdditionalInfo());
-        ChartPanel chartPanel = method.getChartPanel(graph_width, scrollPane.getHeight());
+        ChartPanel chartPanel = method.getChartPanel(graphWidth, scrollPane.getHeight());
         chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         chartPanel.setBackground(Color.white);
 

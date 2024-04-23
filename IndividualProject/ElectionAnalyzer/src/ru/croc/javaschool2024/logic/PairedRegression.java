@@ -43,13 +43,13 @@ public class PairedRegression {
      */
     public double getBeta() {
         if (beta == null) {
-            double x_mean = Statistics.mean(x);
-            double y_mean = Statistics.mean(y);
+            double xMean = Statistics.mean(x);
+            double yMean = Statistics.mean(y);
             beta = 0.0;
             for (int i = 0; i < n; ++i) {
-                beta += (x[i] - x_mean) * (y[i] - y_mean);
+                beta += (x[i] - xMean) * (y[i] - yMean);
             }
-            beta /= Arrays.stream(x).map(x_i -> pow(x_i - x_mean, 2)).sum();
+            beta /= Arrays.stream(x).map(xI -> pow(xI - xMean, 2)).sum();
         }
         return beta;
     }

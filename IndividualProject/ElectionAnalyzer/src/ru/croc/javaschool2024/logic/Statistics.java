@@ -46,11 +46,11 @@ public class Statistics {
         if (a.length != b.length) {
             throw new IllegalArgumentException("Несогласование размеров выборок");
         }
-        double a_mean = mean(a);
-        double b_mean = mean(b);
+        double aMean = mean(a);
+        double bMean = mean(b);
         double cov = 0.0;
         for (int i = 0; i < a.length; ++i) {
-            cov += (a[i] - a_mean) * (b[i] - b_mean);
+            cov += (a[i] - aMean) * (b[i] - bMean);
         }
         return cov / a.length;
     }
